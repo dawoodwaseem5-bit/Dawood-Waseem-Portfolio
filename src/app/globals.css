@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom variables */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+@keyframes sequential-glow {
+  0% {
+    color: rgba(255, 255, 255, 0.3);
+    text-shadow: none;
+  }
+  10% {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(139, 92, 246, 0.6);
+  }
+  20% {
+    color: rgba(255, 255, 255, 0.3);
+    text-shadow: none;
+  }
+  100% {
+    color: rgba(255, 255, 255, 0.3);
+    text-shadow: none;
+  }
+}
+
+.word-glow {
+  animation-name: sequential-glow;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+/* Projects section: scroll-reveal for project windows */
+.project-window {
+  opacity: 0;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.project-window-left {
+  transform: translateX(-40px);
+}
+
+.project-window-right {
+  transform: translateX(40px);
+}
+
+.project-window-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
