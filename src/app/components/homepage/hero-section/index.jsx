@@ -43,7 +43,7 @@ function HeroSection() {
 
           <div className="my-12 w-full flex justify-center items-center gap-5">
             <Link
-              href="https://github.com/Dawood-snippet"
+              href="https://github.com/dawoodwaseem5-bit"
               target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
