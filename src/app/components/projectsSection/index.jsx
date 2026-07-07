@@ -47,6 +47,25 @@ const projects = [
       "/projects/autoaid-3.png",
     ],
   },
+  {
+    id: "nutri-track",
+    name: "Nutri-Track",
+    type: "Full-Stack Web Application",
+    tab: "nutri-track-sand-ten.vercel.app",
+    description:
+      "Nutri-Track is a full-stack health and fitness companion that lets users track daily nutrition, calculate BMI, read live health news, and access curated diet plans through a secure JWT-authenticated dashboard with full CRUD support.",
+    stack: ["React.js", "Node.js", "MongoDB", "Express.js"],
+    link: "https://nutri-track-sand-ten.vercel.app/Login",
+    linkLabel: "Live Preview",
+    linkIcon: "globe",
+    preview: "web",
+    screenshots: [
+      "/projects/nutritrack-1.png",
+      "/projects/nutritrack-2.png",
+      "/projects/nutritrack-3.png",
+      "/projects/nutritrack-4.png",
+    ],
+  },
 ];
 
 /* Auto-cycling screenshot viewer for web projects */
