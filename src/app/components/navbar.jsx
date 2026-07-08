@@ -41,6 +41,7 @@ function Navbar() {
             { href: "/#skills", label: "SKILLS" },
             { href: "/#education", label: "EDUCATION" },
             { href: "/#projects", label: "PROJECTS" },
+            { href: "/#contact", label: "CONTACT" },
           ].map((link) => (
             <li key={link.href} className="w-full md:w-auto">
               <Link

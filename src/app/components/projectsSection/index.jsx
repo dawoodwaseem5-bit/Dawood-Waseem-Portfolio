@@ -316,7 +316,7 @@ function ProjectWindow({ project, index }) {
               ))}
             </div>
 
-            <div className="w-fit">
+            <div className="w-fit mx-auto">
               <Link
                 href={project.link}
                 target="_blank"
