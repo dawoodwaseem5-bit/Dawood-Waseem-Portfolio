@@ -7,11 +7,11 @@ import { Menu, X } from "lucide-react";
 import ThemeToggle from "./theme-toggle";
 
 const links = [
-  { label: "about", href: "#about" },
-  { label: "skills", href: "#skills" },
-  { label: "education", href: "#education" },
-  { label: "projects", href: "#projects" },
-  { label: "contact", href: "#contact" },
+  { label: "about", href: "/#about" },
+  { label: "skills", href: "/#skills" },
+  { label: "education", href: "/#education" },
+  { label: "projects", href: "/projects" },
+  { label: "contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -38,7 +38,7 @@ export default function Navbar() {
         }`}
       >
         <Link
-          href="#top"
+          href="/"
           className="font-geistmono text-sm font-semibold tracking-tight text-slate-900 dark:text-neutral-100"
         >
           <span className="text-emerald-600 dark:text-emerald-400">~/</span>

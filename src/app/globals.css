@@ -18,6 +18,24 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
+/* Skills infinite marquee */
+@keyframes skills-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.skills-marquee-animate {
+  animation: skills-marquee 38s linear infinite;
+}
+
+.skills-marquee:hover .skills-marquee-animate {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -25,5 +43,9 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .skills-marquee-animate {
+    animation: none;
   }
 }

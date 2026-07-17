@@ -3,6 +3,7 @@ import "./globals.css";
 import ThemeProvider from "./components/theme-provider";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import ChatWidget from "./components/chat-widget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
             <Navbar />
             {children}
             <Footer />
+            <ChatWidget />
           </div>
         </ThemeProvider>
       </body>
