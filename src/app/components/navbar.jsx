@@ -1,62 +1,102 @@
 "use client";
+
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./theme-toggle";
 
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+const links = [
+  { label: "about", href: "#about" },
+  { label: "skills", href: "#skills" },
+  { label: "education", href: "#education" },
+  { label: "projects", href: "#projects" },
+  { label: "contact", href: "#contact" },
+];
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="bg-transparent">
-      <div className="relative flex items-center justify-between py-5 px-4 md:px-8">
-        {/* Logo */}
-        <div className="flex flex-shrink-0 items-center">
-          <Link href="/" className="text-[#16f2b3] text-3xl font-bold">
-            DAWOOD WASEEM
-          </Link>
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+      <motion.nav
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={`mx-auto flex max-w-6xl items-center justify-between rounded-xl border px-4 transition-all duration-300 md:px-6 ${
+          scrolled
+            ? "border-gray-200 bg-white/85 py-2 shadow-sm backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/85"
+            : "border-transparent bg-transparent py-4"
+        }`}
+      >
+        <Link
+          href="#top"
+          className="font-geistmono text-sm font-semibold tracking-tight text-slate-900 dark:text-neutral-100"
+        >
+          <span className="text-emerald-600 dark:text-emerald-400">~/</span>
+          dawood-waseem
+        </Link>
+
+        <div className="hidden items-center gap-1 md:flex">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-md px-3 py-2 font-geistmono text-sm text-slate-600 transition-colors duration-200 hover:bg-gray-100 hover:text-slate-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
+            >
+              <span className="text-emerald-600 dark:text-emerald-400">.</span>
+              {link.label}
+            </Link>
+          ))}
+          <div className="ml-2">
+            <ThemeToggle />
+          </div>
         </div>
 
-        {/* Hamburger Menu */}
-        <div className="md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <button
-            onClick={toggleMenu}
-            className="text-white focus:outline-none"
-            aria-label="Toggle Menu"
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg border border-gray-200 bg-white text-slate-700 transition-colors dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
+      </motion.nav>
 
-        {/* Menu Links */}
-        <ul
-          className={`${
-            isOpen ? "block animate-slideDown" : "hidden"
-          } absolute left-0 top-[100%] z-50 w-full bg-black/90 backdrop-blur-md md:static md:flex md:w-auto md:flex-row md:space-x-1 md:bg-transparent transition-all duration-300 ease-in-out`}
-        >
-          {[
-            { href: "/#about", label: "ABOUT" },
-            { href: "/#experience", label: "EXPERIENCE" },
-            { href: "/#skills", label: "SKILLS" },
-            { href: "/#education", label: "EDUCATION" },
-            { href: "/#projects", label: "PROJECTS" },
-            { href: "/#contact", label: "CONTACT" },
-          ].map((link) => (
-            <li key={link.href} className="w-full md:w-auto">
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            className="mx-auto mt-2 max-w-6xl rounded-xl border border-gray-200 bg-white/95 p-2 shadow-sm backdrop-blur-md md:hidden dark:border-neutral-800 dark:bg-neutral-950/95"
+          >
+            {links.map((link) => (
               <Link
-                className="block px-4 py-3 text-lg font-medium text-white transition-all duration-300 hover:text-pink-500 hover:translate-x-1"
+                key={link.href}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
+                onClick={() => setOpen(false)}
+                className="block rounded-md px-4 py-3 font-geistmono text-sm text-slate-600 transition-colors hover:bg-gray-100 hover:text-slate-900 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
               >
+                <span className="text-emerald-600 dark:text-emerald-400">.</span>
                 {link.label}
               </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }
-
-export default Navbar;
